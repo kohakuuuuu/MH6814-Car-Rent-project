@@ -25,6 +25,7 @@ contract CarRental is Ownable {
         uint rent_per_hour;
         uint securityDeposit;
         bool notAvailable;
+        bool damage;
         address customer; 
     }
 
@@ -66,10 +67,16 @@ contract CarRental is Ownable {
         _;
     }
     
-    modifie sameCustomer(uint8 _CarId) {
+    modifier sameCustomer(uint8 _CarId) {
         require(msg.sender == Cars[_CarId].customer, "No previous agreement found with you & company");
         _;
     }
+    
+    modifier Notdamage(uint8 _CarId){
+        require(!Cars[_CarId].damage, "Car damage");
+        _;
+    }
+
 
     event RentalStart(address _customer, uint _startTime, uint _rate, uint8 _CarId, uint _blockId);
     event RentalStop(address _customer, uint _stopTime, uint _totalAmount, uint _totalDebt, uint _blockId);
