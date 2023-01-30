@@ -39,6 +39,7 @@ contract CarRental is Ownable {
         uint etherDebt; // amount in ether owed to Car Rental Shop
     }    
 
+
     mapping (address => Customer) customers ; // Record with customers data (i.e., balance, startTie, debt, rate, etc)
     mapping (uint8 => Car) Cars ; // Stock of Cars    
 
@@ -87,8 +88,6 @@ contract CarRental is Ownable {
     event TokensReceived(address _customer, uint _tokenAmount);    
     event DebtUpdated (address _customer, uint _origAmount, uint _pendingAmount, uint _debitedAmount, uint _tokenDebitedAmount);
     event TokensBought (address _customer,uint _etherAmount, uint _tokenAmount);
-
-}
 
     constructor (Token _token) Ownable() {
         token = _token;
@@ -271,4 +270,5 @@ contract CarRental is Ownable {
 
      function getTokenAccountBalance(address customer) public view returns (uint) {
          return customers[customer].tokenBalance;
-     }
+     }    
+}
